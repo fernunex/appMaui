@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:NutriCalc.ViewModels"
+             xmlns:models="clr-namespace:NutriCalc.Models"
+             xmlns:templates="clr-namespace:NutriCalc.Views.Templates"
+             x:Class="NutriCalc.Views.ListadoUsuarios"
+             Title="ListadoUsuarios">
+    <VerticalStackLayout x:DataType="vm:UsuariosViewModel">
+        <Button Text="Listar Usuarios" Command="{Binding ListarUsuariosCommand}" ></Button>
+        <CollectionView ItemsSource="{Binding Usuarios}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:UsuarioModel">
+                    <templates:ItemAlumno></templates:ItemAlumno>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+            
+            
+    </VerticalStackLayout>
+</ContentPage>
