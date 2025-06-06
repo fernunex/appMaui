@@ -11,7 +11,7 @@
         <CollectionView ItemsSource="{Binding Usuarios}">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:UsuarioModel">
-                    <templates:ItemAlumno></templates:ItemAlumno>
+                    <templates:ItemUsuario></templates:ItemUsuario>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>

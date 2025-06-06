@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:NutriCalc.ViewModels"
+             x:Class="NutriCalc.Views.UsuarioRegistro"
+             x:DataType="viewmodels:RegistroViewModel"
+             BackgroundColor="#F2F4F8"
+             Title="Registro de Usuario">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="16">
+
+            <Label Text="Registro"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   TextColor="#2C3E50" />
+
+            <!-- Contenedor principal -->
+            <Border Stroke="#D0D3D4"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 12"
+                    Background="#FFFFFF"
+                    Padding="16">
+
+                <VerticalStackLayout Spacing="12">
+
+                    <!-- Campo Nombre -->
+                    <Border Stroke="#BDC3C7" StrokeThickness="1" StrokeShape="RoundRectangle 8" Background="#ECF0F1" Padding="4">
+                        <Entry Text="{Binding Nombre}" 
+                               Placeholder="Nombre"
+                               FontSize="16"/>
+                    </Border>
+
+                    <!-- Campo Apellido -->
+                    <Border Stroke="#BDC3C7" StrokeThickness="1" StrokeShape="RoundRectangle 8" Background="#ECF0F1" Padding="4">
+                        <Entry Text="{Binding Apellido}" 
+                               Placeholder="Apellido"
+                               FontSize="16"/>
+                    </Border>
+
+                    <!-- Campo Edad -->
+                    <Border Stroke="#BDC3C7" StrokeThickness="1" StrokeShape="RoundRectangle 8" Background="#ECF0F1" Padding="4">
+                        <Entry Text="{Binding Edad}" 
+                               Placeholder="Edad"
+                               Keyboard="Numeric"
+                               FontSize="16"/>
+                    </Border>
+
+                    <!-- Botón Registrar -->
+                    <Button Text="Registrar" 
+                            Command="{Binding GuardarUsuarioCommand}" 
+                            BackgroundColor="#27AE60" 
+                            TextColor="White"
+                            FontAttributes="Bold"
+                            HeightRequest="48"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Errores -->
+            <CollectionView ItemsSource="{Binding ErroresValidacion}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Stroke="#E57373" StrokeThickness="1" StrokeShape="RoundRectangle 6" Background="#FFEBEE" Padding="8" Margin="0,4">
+                            <Label Text="{Binding}" 
+                                   TextColor="#C62828"
+                                   FontSize="13" />
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

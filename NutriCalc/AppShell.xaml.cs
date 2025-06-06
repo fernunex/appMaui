@@ -6,6 +6,7 @@
         {
             InitializeComponent();
             Routing.RegisterRoute(nameof(ListadoUsuarios), typeof(ListadoUsuarios));
+            Routing.RegisterRoute(nameof(UsuarioRegistro), typeof(UsuarioRegistro));
         }
     }
 }

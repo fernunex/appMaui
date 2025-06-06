@@ -20,10 +20,12 @@
 
             //ViewModels
             services.AddTransient<UsuariosViewModel>();
+            services.AddTransient<RegistroViewModel>();
 
 
             //Views
             services.AddSingleton<ListadoUsuarios>();
+            services.AddTransient<UsuarioRegistro>();
 
             //Services
 

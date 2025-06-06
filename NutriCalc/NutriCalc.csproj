@@ -82,10 +82,22 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Views\UsuarioRegistro.xaml.cs">
+	    <DependentUpon>UsuarioRegistro.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\Templates\ItemUsuario.xaml.cs">
+	    <DependentUpon>ItemUsuario.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Views\UsuarioRegistro.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\ListadoUsuarios.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\Templates\ItemAlumno.xaml">
+	  <MauiXaml Update="Views\Templates\ItemUsuario.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

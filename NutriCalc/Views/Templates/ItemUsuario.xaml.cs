@@ -1,8 +1,8 @@
 namespace NutriCalc.Views.Templates;
 
-public partial class ItemAlumno : ContentView
+public partial class ItemUsuario : ContentView
 {
-	public ItemAlumno()
+	public ItemUsuario()
 	{
 		InitializeComponent();
 	}
