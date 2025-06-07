@@ -13,6 +13,7 @@
             Services = ConfigureServices(services);
 
             InitializeComponent();
+            MainPage = new AppShell();
         }
 
         private static IServiceProvider ConfigureServices(ServiceCollection services)
@@ -28,15 +29,15 @@
             services.AddTransient<UsuarioRegistro>();
 
             //Services
+            services.AddSingleton<IUsuariosDao, UsuariosDao>();
 
 
             return services.BuildServiceProvider();
         }
 
-
-        protected override Window CreateWindow(IActivationState? activationState)
-        {
-            return new Window(new AppShell());
-        }
+        //protected override Window CreateWindow(IActivationState? activationState)
+        //{
+        //    return new Window(new AppShell());
+        //}
     }
 }

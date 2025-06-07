@@ -6,6 +6,31 @@ namespace NutriCalc.ViewModels
 {
     public partial class RegistroViewModel: ObservableValidator
     {
+        private readonly IUsuariosDao _usuariosDao;
+
+
+        [ObservableProperty]
+        private string resultado;
+
+        [ObservableProperty]
+        private bool isBusy;
+
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(IsEnabled))]
+        private bool isVisible;
+
+        public bool IsEnabled => !IsVisible;
+
+        [ObservableProperty]
+        private int id;
+
+
+        public RegistroViewModel()
+        {
+            _usuariosDao = App.Current.Services.GetService<IUsuariosDao>();
+        }
+
+
         // Para enumerar los errores de validación
         public ObservableCollection<string> ErroresValidacion { get; } = new ();
 
@@ -46,13 +71,37 @@ namespace NutriCalc.ViewModels
         [RelayCommand]
         public async Task GuardarUsuario()
         {
+            IsBusy = true;
+            IsVisible = false;
             ValidateAllProperties();
-            
+
             ErroresValidacion.Clear();
             GetErrors(nameof(Nombre)).ToList().ForEach(error => ErroresValidacion.Add(error.ErrorMessage)); 
             GetErrors(nameof(Apellido)).ToList().ForEach(error => ErroresValidacion.Add(error.ErrorMessage));
             GetErrors(nameof(Edad)).ToList().ForEach(error => ErroresValidacion.Add(error.ErrorMessage));
 
+            IsBusy = false;
+            if (ErroresValidacion.Count > 0) return;
+
+            IsBusy = true;
+            if (Id == 0) 
+                Id = await _usuariosDao.AddUsuario(new UsuarioModel() 
+                { Nombre = Nombre, 
+                  Apellido = Apellido,
+                  Edad = Edad});
+            if (Id > 0) await _usuariosDao.UpdateUsuario(new UsuarioModel() 
+            { Nombre = Nombre, 
+              Apellido = Apellido, 
+              Id = Id,
+              Edad = Edad
+            });
+
+            Resultado = $" Registro id:{Id}";
+            IsBusy = false;
+            IsVisible = true;
+
+            await Task.Delay(2000);
+            await Shell.Current.Navigation.PopToRootAsync();
         }
 
 

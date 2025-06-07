@@ -8,9 +8,18 @@
     Shell.FlyoutBehavior="Flyout"
     Title="NutriCalc">
 
-    <ShellContent
+    <!--<ShellContent
         Title="Home"
         ContentTemplate="{DataTemplate views:UsuarioRegistro}"
-        Route="MainPage" />
+        Route="MainPage" />-->
+
+    <ShellContent
+        Title="Listado Usuarios"
+        ContentTemplate="{DataTemplate views:ListadoUsuarios}"
+        Route="ListadoUsuarios" />
+    <ShellContent
+        Title="Registro Usuario"
+        ContentTemplate="{DataTemplate views:UsuarioRegistro}"
+        Route="UsuarioRegistro" />
 
 </Shell>
