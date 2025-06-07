@@ -8,67 +8,99 @@
              Title="Registro de Usuario">
 
     <ScrollView>
-        <VerticalStackLayout Padding="20" Spacing="16">
+        <VerticalStackLayout Padding="20" Spacing="20" WidthRequest="400" HorizontalOptions="Center">
 
-            <Label Text="Registro"
-                   FontSize="24"
+            <!-- Sección: Datos Generales -->
+            <Label Text="Datos Generales"
+                   FontSize="20"
                    FontAttributes="Bold"
-                   HorizontalOptions="Center"
                    TextColor="#2C3E50" />
-
-            <!-- Contenedor principal -->
-            <Border Stroke="#D0D3D4"
-                    StrokeThickness="1"
-                    StrokeShape="RoundRectangle 12"
-                    Background="#FFFFFF"
-                    Padding="16">
-
+            <Border Stroke="#D0D3D4" StrokeShape="RoundRectangle 10" Padding="16" BackgroundColor="White">
                 <VerticalStackLayout Spacing="12">
 
-                    <!-- Campo Nombre -->
-                    <Border Stroke="#BDC3C7" StrokeThickness="1" StrokeShape="RoundRectangle 8" Background="#ECF0F1" Padding="4">
-                        <Entry Text="{Binding Nombre}" 
-                               Placeholder="Nombre"
-                               FontSize="16"/>
-                    </Border>
+                    <Label Text="Nombre" />
+                    <Entry Text="{Binding Nombre, Mode=TwoWay}" Placeholder="Ej. Juan" />
 
-                    <!-- Campo Apellido -->
-                    <Border Stroke="#BDC3C7" StrokeThickness="1" StrokeShape="RoundRectangle 8" Background="#ECF0F1" Padding="4">
-                        <Entry Text="{Binding Apellido}" 
-                               Placeholder="Apellido"
-                               FontSize="16"/>
-                    </Border>
+                    <Label Text="Apellido" />
+                    <Entry Text="{Binding Apellido, Mode=TwoWay}" Placeholder="Ej. Pérez" />
 
-                    <!-- Campo Edad -->
-                    <Border Stroke="#BDC3C7" StrokeThickness="1" StrokeShape="RoundRectangle 8" Background="#ECF0F1" Padding="4">
-                        <Entry Text="{Binding Edad}" 
-                               Placeholder="Edad"
-                               Keyboard="Numeric"
-                               FontSize="16"/>
-                    </Border>
+                    <Label Text="Edad" />
+                    <Entry Text="{Binding Edad, Mode=TwoWay}" Placeholder="Ej. 25" Keyboard="Numeric" />
 
-                    <!-- Botón Registrar -->
-                    <Button Text="Registrar" 
-                            Command="{Binding GuardarUsuarioCommand}" 
-                            BackgroundColor="#27AE60" 
-                            TextColor="White"
-                            FontAttributes="Bold"
-                            HeightRequest="48"/>
                 </VerticalStackLayout>
             </Border>
 
-            <!-- Errores -->
-            <CollectionView ItemsSource="{Binding ErroresValidacion}">
+            <!-- Sección: Datos Fisiológicos -->
+            <Label Text="Datos Fisiológicos"
+                   FontSize="20"
+                   FontAttributes="Bold"
+                   TextColor="#2C3E50" />
+            <Border Stroke="#D0D3D4" StrokeShape="RoundRectangle 10" Padding="16" BackgroundColor="White">
+                <VerticalStackLayout Spacing="12">
+
+                    <Label Text="Peso (kg)" />
+                    <Entry Text="{Binding Peso, Mode=TwoWay}" Placeholder="Ej. 70" Keyboard="Numeric" />
+
+                    <Label Text="Estatura (cm)" />
+                    <Entry Text="{Binding Estatura, Mode=TwoWay}" Placeholder="Ej. 175" Keyboard="Numeric" />
+
+                    <Label Text="Sexo" />
+                    <Picker Title="Seleccione sexo"
+                        SelectedIndex="{Binding SelectedSexo, Mode=TwoWay}">
+                        <Picker.Items>
+                            <x:String>No seleccionado</x:String>
+                            <x:String>Masculino</x:String>
+                            <x:String>Femenino</x:String>
+                        </Picker.Items>
+                    </Picker>
+
+
+                    <Label Text="Nivel de Actividad Física" />
+                    <Picker Title="Seleccione un nivel"
+        SelectedIndex="{Binding SelectedActividadFisica, Mode=TwoWay}">
+                        <Picker.Items>
+                            <x:String>No seleccionado</x:String> <!-- 0 -->
+                            <x:String>Rara Vez</x:String><!-- 1 -->
+                            <x:String>1 a 3 Días x Semana</x:String> <!-- 2 -->
+                            <x:String>3 a 5 Días x Semana</x:String><!-- 3 -->
+                            <x:String>6 a 7 Días x Semana</x:String><!-- 4 -->
+                            <x:String>Ejercicio diario + Trabajo Físico</x:String><!-- 5 -->
+                        </Picker.Items>
+                    </Picker>
+
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Validaciones -->
+            <CollectionView ItemsSource="{Binding ErroresValidacion}" Margin="0,10">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Border Stroke="#E57373" StrokeThickness="1" StrokeShape="RoundRectangle 6" Background="#FFEBEE" Padding="8" Margin="0,4">
-                            <Label Text="{Binding}" 
-                                   TextColor="#C62828"
-                                   FontSize="13" />
+                        <Border Stroke="#E57373" BackgroundColor="#FFEBEE" StrokeShape="RoundRectangle 6" Padding="8" Margin="0,4">
+                            <Label Text="{Binding .}" TextColor="#C62828" FontSize="13" />
                         </Border>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+
+            <!-- Botón -->
+            <Button Text="Registrar"
+                    Command="{Binding GuardarUsuarioCommand}"
+                    BackgroundColor="#27AE60"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    HeightRequest="48" />
+
+            <!-- Loader -->
+            <ActivityIndicator IsRunning="{Binding IsBusy}"
+                               IsVisible="{Binding IsBusy}" />
+
+            <!-- Resultado visible -->
+            <Border BackgroundColor="Green" IsVisible="{Binding IsVisible}" Padding="8">
+                <Label FontSize="Title"
+                       HorizontalTextAlignment="Center"
+                       Text="{Binding Resultado, Mode=TwoWay}"
+                       TextColor="White" />
+            </Border>
 
         </VerticalStackLayout>
     </ScrollView>
