@@ -7,6 +7,22 @@ namespace NutriCalc.ViewModels
     {
         private readonly IUsuariosDao _usuariosDao;
 
+        private string sexoString;
+        public string SexoString
+        {
+            get => sexoString;
+            set => SetProperty(ref sexoString, value);
+        }
+
+
+        private string actividadFisicaString;
+        public string ActividadFisicaString
+        {
+            get => actividadFisicaString;
+            set => SetProperty(ref actividadFisicaString, value);
+        }
+
+
         private int id;
         public int Id
         {
@@ -17,7 +33,10 @@ namespace NutriCalc.ViewModels
                 if (id > 0)
                 {
                     CargarUsuario().ConfigureAwait(false);
+                    SexoString = GetSexoString(Usuario?.Sexo ?? 0);
+                    ActividadFisicaString = GetActividadFisicaString(Usuario?.ActividadFisica ?? 0);
                 }
+
             }
         }
 
@@ -42,6 +61,31 @@ namespace NutriCalc.ViewModels
         public async Task Volver()
         {
             await Shell.Current.Navigation.PushAsync(new ListadoUsuarios(), false);
+        }
+
+
+        public string GetSexoString(int sexoNum)
+        {
+            return sexoNum switch
+            {
+                1 => "Masculino",
+                2 => "Femenino",
+                _ => "No especificado"
+            };
+        }
+
+        public string GetActividadFisicaString(int actividadFisicaNum)
+        {
+            return actividadFisicaNum switch
+            {
+                1 => "Rara vez",
+                2 => "1 a 3 días a la semana",
+                3 => "3 a 5 días a la semana",
+                4 => "6 a 7 días a la semana",
+                5 => "Trabajo físico intenso + Ejercicio Diario",
+                _ => "No especificado"
+            };
+
         }
     }
 }

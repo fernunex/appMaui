@@ -23,7 +23,7 @@
                     <Label Text="{Binding Usuario.Edad}" />
 
                     <Label Text="Sexo:" FontAttributes="Bold"/>
-                    <Label Text="{Binding Usuario.Sexo, Converter={StaticResource SexoConverter}}" />
+                    <Label Text="{Binding SexoString}" />
                 </VerticalStackLayout>
             </Frame>
 
@@ -64,7 +64,7 @@
                     <Label Text="{Binding Usuario.GastoTotalEnergetico}" />
 
                     <Label Text="Nivel de Actividad Física:" FontAttributes="Bold"/>
-                    <Label Text="{Binding Usuario.ActividadFisica, Converter={StaticResource ActividadFisicaConverter}}" />
+                    <Label Text="{Binding ActividadFisicaString}" />
                 </VerticalStackLayout>
             </Frame>
 

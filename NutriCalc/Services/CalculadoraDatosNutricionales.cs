@@ -83,17 +83,17 @@ namespace NutriCalc.Services
             switch (actividadFisica)
             {
                 case 1: // Rara vez
-                    return brm * 1.2;
+                    return Math.Round(brm * 1.2, 2);
                 case 2: // 1 a 3 veces a la semana
-                    return brm * 1.375;
+                    return Math.Round(brm * 1.375, 2);
                 case 3: // 3 a 5 veces a la semana
-                    return brm * 1.55;
+                    return Math.Round(brm * 1.55, 2);
                 case 4: // 6 a 7 veces a la semana
-                    return brm * 1.725;
+                    return Math.Round(brm * 1.725, 2);
                 case 5: // Trabajo físico intenso + Ejercicio
-                    return brm * 1.9;
-                default:
-                    return brm; // Si no se especifica actividad física queda igual
+                    return Math.Round(brm * 1.9, 2);
+                default:// Si no se especifica actividad física queda igual
+                    return Math.Round(brm, 2);
             }
         }
 
