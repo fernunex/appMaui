@@ -8,6 +8,10 @@ namespace NutriCalc.ViewModels
     [QueryProperty(nameof(Nombre), nameof(Nombre))]
     [QueryProperty(nameof(Apellido), nameof(Apellido))]
     [QueryProperty(nameof(Edad), nameof(Edad))]
+    [QueryProperty(nameof(Peso), nameof(Peso))]
+    [QueryProperty(nameof(Estatura), nameof(Estatura))]
+    [QueryProperty(nameof(SelectedSexo), nameof(SelectedSexo))]
+    [QueryProperty(nameof(SelectedActividadFisica), nameof(SelectedActividadFisica))]
     public partial class RegistroViewModel: ObservableValidator
     {
         private readonly IUsuariosDao _usuariosDao;
@@ -109,6 +113,15 @@ namespace NutriCalc.ViewModels
             set => SetProperty(ref edad, value, true);
         }
 
+        // Datos calculados
+        private double imc;
+        private string estadoIMC;
+        private int grasaCorporal;
+        private string estadoGrasaCorporal;
+        private int pesoIdeal;
+        private double gastoTotalEnergetico;
+
+
         [RelayCommand]
         public async Task GuardarUsuario()
         {
@@ -138,17 +151,36 @@ namespace NutriCalc.ViewModels
             IsBusy = false;
             if (ErroresValidacion.Count > 0) return;
 
+            // Calculamos los datos nutricionales
+            CalcularDatosNutricionales();
+
             IsBusy = true;
             if (Id == 0) 
                 Id = await _usuariosDao.AddUsuario(new UsuarioModel() 
                 { Nombre = Nombre, 
                   Apellido = Apellido,
-                  Edad = Edad});
+                  Edad = Edad,
+                  Sexo = SelectedSexo,
+                  ActividadFisica = selectedActividadFisica,
+                  IMC = imc,
+                  EstadoIMC = estadoIMC,
+                  GrasaCorporal = grasaCorporal,
+                  EstadoGrasaCorporal = estadoGrasaCorporal,
+                  PesoIdeal = pesoIdeal,
+                  GastoTotalEnergetico = gastoTotalEnergetico});
             if (Id > 0) await _usuariosDao.UpdateUsuario(new UsuarioModel() 
             { Nombre = Nombre, 
               Apellido = Apellido, 
               Id = Id,
-              Edad = Edad
+              Edad = Edad,
+                Sexo = SelectedSexo,
+                ActividadFisica = selectedActividadFisica,
+                IMC = imc,
+                EstadoIMC = estadoIMC,
+                GrasaCorporal = grasaCorporal,
+                EstadoGrasaCorporal = estadoGrasaCorporal,
+                PesoIdeal = pesoIdeal,
+                GastoTotalEnergetico = gastoTotalEnergetico
             });
 
             Resultado = $" Registro id:{Id}";
@@ -171,6 +203,18 @@ namespace NutriCalc.ViewModels
             SelectedActividadFisica = 0;
             Resultado = string.Empty;
             IsVisible = false;
+        }
+
+        private void CalcularDatosNutricionales() { 
+            imc = CalculadoraDatosNutricionales.CalcularIMC(Peso, Estatura);
+            estadoIMC = CalculadoraDatosNutricionales.ClasificarIMC(imc);
+            grasaCorporal = CalculadoraDatosNutricionales.CalcularGrasaCorporal(imc, Edad, SelectedSexo);
+            estadoGrasaCorporal = CalculadoraDatosNutricionales.ClasificarGC(grasaCorporal, SelectedSexo);
+            pesoIdeal = CalculadoraDatosNutricionales.CalcularPesoIdeal(Estatura, SelectedSexo);
+            double bmr = CalculadoraDatosNutricionales.CalcularBMR(Peso, Estatura, Edad, SelectedSexo);
+            gastoTotalEnergetico = CalculadoraDatosNutricionales.CalcularGastoTotalEnergetico(bmr, SelectedActividadFisica);
+        
+            Console.WriteLine($"IMC: {imc}, Estado IMC: {estadoIMC}, Grasa Corporal: {grasaCorporal}, Estado Grasa Corporal: {estadoGrasaCorporal}, Peso Ideal: {pesoIdeal}, Gasto Total Energético: {gastoTotalEnergetico}");
         }
     }
 }

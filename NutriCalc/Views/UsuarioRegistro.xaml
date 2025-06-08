@@ -71,7 +71,6 @@
                 </VerticalStackLayout>
             </Border>
 
-            <!-- Errores Validaciones -->
             <CollectionView ItemsSource="{Binding ErroresValidacion}" Margin="0,10">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
@@ -82,7 +81,6 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-            <!-- Boton Registrar -->
             <Button Text="Registrar"
                     Command="{Binding GuardarUsuarioCommand}"
                     BackgroundColor="#27AE60"
@@ -93,7 +91,6 @@
             <ActivityIndicator IsRunning="{Binding IsBusy}"
                                IsVisible="{Binding IsBusy}" />
 
-            <!-- Resultado visible -->
             <Border BackgroundColor="Green" IsVisible="{Binding IsVisible}" Padding="8">
                 <Label FontSize="Title"
                        HorizontalTextAlignment="Center"
