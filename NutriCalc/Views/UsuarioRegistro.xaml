@@ -75,7 +75,7 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Border Stroke="#E57373" BackgroundColor="#FFEBEE" StrokeShape="RoundRectangle 6" Padding="8" Margin="0,4">
-                            <Label Text="{Binding}" TextColor="#C62828" FontSize="13" />
+                            <Label Text="{Binding .}" TextColor="#C62828" FontSize="13" />
                         </Border>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
