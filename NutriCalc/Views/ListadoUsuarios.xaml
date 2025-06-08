@@ -3,24 +3,57 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:NutriCalc.ViewModels"
              xmlns:models="clr-namespace:NutriCalc.Models"
-             xmlns:templates="clr-namespace:NutriCalc.Views.Templates"
              x:Class="NutriCalc.Views.ListadoUsuarios"
-             Title="ListadoUsuarios"
+             Title="Listado de Usuarios"
              x:DataType="vm:UsuariosViewModel">
 
-    <VerticalStackLayout x:DataType="vm:UsuariosViewModel">
-        <Button Text="Listar Usuarios" Command="{Binding ListarUsuariosCommand}" ></Button>
+    <VerticalStackLayout Padding="10" Spacing="10">
+
+        <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+            <Button Text="Listar Usuarios"
+                    TextColor="Black"
+                    Command="{Binding ListarUsuariosCommand}" 
+                    BackgroundColor="LightSkyBlue" />
+            <Button Text="Agregar Usuario"
+                    TextColor="Black"
+                    Command="{Binding AgregarUsuarioCommand}" 
+                    BackgroundColor="LightGreen" />
+        </HorizontalStackLayout>
+
         <CollectionView ItemsSource="{Binding Usuarios}">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:UsuarioModel">
-                    <HorizontalStackLayout
-                         Padding="2" BackgroundColor="Beige">
-                        <Label Text="{Binding Id}"></Label>
-                        <Label Text="{Binding Nombre}"></Label>
-                        <Label Text="{Binding Apellido}"></Label>
-                    </HorizontalStackLayout>
+                    <Frame BorderColor="LightGray" CornerRadius="8" Margin="5">
+                        <VerticalStackLayout Spacing="5">
+                            <Label Text="{Binding Id}" FontSize="12" TextColor="Black" />
+                            <Label Text="{Binding Nombre}" FontAttributes="Bold" FontSize="18" />
+                            <Label Text="{Binding Apellido}" FontSize="16" />
+
+                            <HorizontalStackLayout Spacing="10" HorizontalOptions="End">
+                                <Button Text="Editar"
+                                        TextColor="Black"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:UsuariosViewModel}}, Path=EditarUsuarioCommand}"
+                                        CommandParameter="{Binding}" 
+                                        BackgroundColor="LightYellow" />
+
+                                <Button Text="Eliminar" 
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:UsuariosViewModel}}, Path=EliminarUsuarioCommand}"
+                                        CommandParameter="{Binding}" 
+                                        BackgroundColor="LightCoral" />
+                            </HorizontalStackLayout>
+                        </VerticalStackLayout>
+                    </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
+
+            <CollectionView.EmptyView>
+                <Label Text="No hay usuarios registrados." 
+                       HorizontalOptions="Center" 
+                       VerticalOptions="Center"
+                       TextColor="Gray"
+                       FontAttributes="Italic"/>
+            </CollectionView.EmptyView>
         </CollectionView>
+
     </VerticalStackLayout>
 </ContentPage>
