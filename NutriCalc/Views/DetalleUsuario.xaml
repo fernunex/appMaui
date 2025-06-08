@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:NutriCalc.ViewModels"
+             x:Class="NutriCalc.Views.DetalleUsuario"
+             Title="Detalle de Usuario"
+             x:DataType="viewmodels:DetalleUsuarioViewModel">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+
+            <!-- DATOS GENERALES -->
+            <Frame BorderColor="DarkGray" CornerRadius="10" Padding="15">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Datos Generales" FontAttributes="Bold" FontSize="20" />
+                    <Label Text="Nombre:" FontAttributes="Bold"/>
+                    <Label Text="{Binding Usuario.Nombre}" />
+
+                    <Label Text="Apellido:" FontAttributes="Bold"/>
+                    <Label Text="{Binding Usuario.Apellido}" />
+
+                    <Label Text="Edad:" FontAttributes="Bold"/>
+                    <Label Text="{Binding Usuario.Edad}" />
+
+                    <Label Text="Sexo:" FontAttributes="Bold"/>
+                    <Label Text="{Binding Usuario.Sexo, Converter={StaticResource SexoConverter}}" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- DATOS FISIOLÓGICOS -->
+            <Frame BorderColor="DarkGray" CornerRadius="10" Padding="15">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Datos Fisiológicos" FontAttributes="Bold" FontSize="20" />
+
+                    <Label Text="Estatura (cm):" FontAttributes="Bold"/>
+                    <Label Text="{Binding Usuario.Estatura}" />
+
+                    <Label Text="Peso (kg):" FontAttributes="Bold"/>
+                    <Label Text="{Binding Usuario.Peso}" />
+
+                    <Label Text="IMC:" FontAttributes="Bold"/>
+                    <Label Text="{Binding Usuario.IMC}" />
+
+                    <Label Text="Estado IMC:" FontAttributes="Bold"/>
+                    <Label Text="{Binding Usuario.EstadoIMC}" />
+
+                    <Label Text="Grasa Corporal (%):" FontAttributes="Bold"/>
+                    <Label Text="{Binding Usuario.GrasaCorporal}" />
+
+                    <Label Text="Estado Grasa Corporal:" FontAttributes="Bold"/>
+                    <Label Text="{Binding Usuario.EstadoGrasaCorporal}" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- DATOS NUTRICIONALES -->
+            <Frame BorderColor="DarkGray" CornerRadius="10" Padding="15">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Datos Nutricionales" FontAttributes="Bold" FontSize="20" />
+
+                    <Label Text="Peso Ideal (kg):" FontAttributes="Bold"/>
+                    <Label Text="{Binding Usuario.PesoIdeal}" />
+
+                    <Label Text="Gasto Energético Total:" FontAttributes="Bold"/>
+                    <Label Text="{Binding Usuario.GastoTotalEnergetico}" />
+
+                    <Label Text="Nivel de Actividad Física:" FontAttributes="Bold"/>
+                    <Label Text="{Binding Usuario.ActividadFisica, Converter={StaticResource ActividadFisicaConverter}}" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- BOTÓN VOLVER -->
+            <Button Text="Volver"
+                    Command="{Binding VolverCommand}"
+                    BackgroundColor="LightGray"
+                    TextColor="Black"
+                    HorizontalOptions="Center" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

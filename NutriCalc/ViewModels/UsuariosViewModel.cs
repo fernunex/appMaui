@@ -58,13 +58,27 @@ namespace NutriCalc.ViewModels
         [RelayCommand]
         public async Task EditarUsuario(UsuarioModel usuario)
         {
-            await Shell.Current.GoToAsync($"/UsuarioRegistro?Id={usuario.Id}&Nombre={usuario.Nombre}&Apellido={usuario.Apellido}&Edad={usuario.Edad}", false);
+            await Shell.Current.GoToAsync($"/UsuarioRegistro?" +
+                $"Id={usuario.Id}" +
+                $"&Nombre={usuario.Nombre}" +
+                $"&Apellido={usuario.Apellido}" +
+                $"&Edad={usuario.Edad}" +
+                $"&Peso={usuario.Peso}" +
+                $"&Estatura={usuario.Estatura}" +
+                $"&SelectedSexo={usuario.Sexo}" +
+                $"&SelectedActividadFisica={usuario.ActividadFisica}", false);
         }
 
         [RelayCommand]
         public async Task AgregarUsuario()
         {
             await Shell.Current.Navigation.PushAsync(new UsuarioRegistro(), false);
+        }
+
+        [RelayCommand]
+        public async Task DetalleUsuario(UsuarioModel usuario)
+        {
+            await Shell.Current.GoToAsync($"/DetalleUsuario?Id={usuario.Id}", false);
         }
     }
 }

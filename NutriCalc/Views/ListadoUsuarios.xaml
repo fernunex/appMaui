@@ -30,16 +30,22 @@
                             <Label Text="{Binding Apellido}" FontSize="16" />
 
                             <HorizontalStackLayout Spacing="10" HorizontalOptions="End">
+                                <Button Text="Detalle"
+                            TextColor="White"
+                            BackgroundColor="DodgerBlue"
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type vm:UsuariosViewModel}}, Path=DetalleUsuarioCommand}"
+                            CommandParameter="{Binding}" />
+
                                 <Button Text="Editar"
-                                        TextColor="Black"
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:UsuariosViewModel}}, Path=EditarUsuarioCommand}"
-                                        CommandParameter="{Binding}" 
-                                        BackgroundColor="LightYellow" />
+                            TextColor="Black"
+                            BackgroundColor="LightYellow"
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type vm:UsuariosViewModel}}, Path=EditarUsuarioCommand}"
+                            CommandParameter="{Binding}" />
 
                                 <Button Text="Eliminar" 
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vm:UsuariosViewModel}}, Path=EliminarUsuarioCommand}"
-                                        CommandParameter="{Binding}" 
-                                        BackgroundColor="LightCoral" />
+                            BackgroundColor="LightCoral"
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type vm:UsuariosViewModel}}, Path=EliminarUsuarioCommand}"
+                            CommandParameter="{Binding}" />
                             </HorizontalStackLayout>
                         </VerticalStackLayout>
                     </Frame>

@@ -22,11 +22,13 @@
             //ViewModels
             services.AddTransient<UsuariosViewModel>();
             services.AddTransient<RegistroViewModel>();
+            services.AddTransient<DetalleUsuarioViewModel>();
 
 
             //Views
             services.AddSingleton<ListadoUsuarios>();
             services.AddSingleton<UsuarioRegistro>();
+            services.AddSingleton<DetalleUsuario>();
 
             //Services
             services.AddTransient<IUsuariosDao, UsuariosDao>();

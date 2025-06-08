@@ -21,5 +21,9 @@
         Title="Registro Usuario"
         ContentTemplate="{DataTemplate views:UsuarioRegistro}"
         Route="UsuarioRegistro" />
+    <ShellContent
+        Title="Detalle Usuario"
+        ContentTemplate="{DataTemplate views:DetalleUsuario}"
+        Route="DetalleUsuario" />
 
 </Shell>
