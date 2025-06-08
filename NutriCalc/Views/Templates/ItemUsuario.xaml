@@ -2,7 +2,9 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="NutriCalc.Views.Templates.ItemUsuario"
-             xmlns:models="clr-namespace:NutriCalc.Models">
+             xmlns:models="clr-namespace:NutriCalc.Models"
+             xmlns:viewModel="clr-namespace:NutriCalc.ViewModels"
+             >
     <HorizontalStackLayout
         x:DataType="models:UsuarioModel"
         Padding="2" BackgroundColor="Beige">

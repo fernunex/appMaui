@@ -26,10 +26,11 @@
 
             //Views
             services.AddSingleton<ListadoUsuarios>();
-            services.AddTransient<UsuarioRegistro>();
+            services.AddSingleton<UsuarioRegistro>();
 
             //Services
-            services.AddSingleton<IUsuariosDao, UsuariosDao>();
+            services.AddTransient<IUsuariosDao, UsuariosDao>();
+            services.AddTransient<IDialogService, DialogService>();
 
 
             return services.BuildServiceProvider();

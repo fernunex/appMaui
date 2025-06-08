@@ -5,17 +5,22 @@
              xmlns:models="clr-namespace:NutriCalc.Models"
              xmlns:templates="clr-namespace:NutriCalc.Views.Templates"
              x:Class="NutriCalc.Views.ListadoUsuarios"
-             Title="ListadoUsuarios">
+             Title="ListadoUsuarios"
+             x:DataType="vm:UsuariosViewModel">
+
     <VerticalStackLayout x:DataType="vm:UsuariosViewModel">
         <Button Text="Listar Usuarios" Command="{Binding ListarUsuariosCommand}" ></Button>
         <CollectionView ItemsSource="{Binding Usuarios}">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:UsuarioModel">
-                    <templates:ItemUsuario></templates:ItemUsuario>
+                    <HorizontalStackLayout
+                         Padding="2" BackgroundColor="Beige">
+                        <Label Text="{Binding Id}"></Label>
+                        <Label Text="{Binding Nombre}"></Label>
+                        <Label Text="{Binding Apellido}"></Label>
+                    </HorizontalStackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-            
-            
     </VerticalStackLayout>
 </ContentPage>

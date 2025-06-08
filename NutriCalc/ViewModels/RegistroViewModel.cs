@@ -4,6 +4,10 @@ using CommunityToolkit.Mvvm.Input;
 
 namespace NutriCalc.ViewModels
 {
+    [QueryProperty(nameof(Id), nameof(Id))]
+    [QueryProperty(nameof(Nombre), nameof(Nombre))]
+    [QueryProperty(nameof(Apellido), nameof(Apellido))]
+    [QueryProperty(nameof(Edad), nameof(Edad))]
     public partial class RegistroViewModel: ObservableValidator
     {
         private readonly IUsuariosDao _usuariosDao;

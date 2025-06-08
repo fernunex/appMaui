@@ -10,7 +10,7 @@
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="20" WidthRequest="400" HorizontalOptions="Center">
 
-            <!-- Sección: Datos Generales -->
+            <!-- Datos Generales -->
             <Label Text="Datos Generales"
                    FontSize="20"
                    FontAttributes="Bold"
@@ -30,7 +30,7 @@
                 </VerticalStackLayout>
             </Border>
 
-            <!-- Sección: Datos Fisiológicos -->
+            <!--Datos Fisiológicos -->
             <Label Text="Datos Fisiológicos"
                    FontSize="20"
                    FontAttributes="Bold"
@@ -71,18 +71,18 @@
                 </VerticalStackLayout>
             </Border>
 
-            <!-- Validaciones -->
+            <!-- Errores Validaciones -->
             <CollectionView ItemsSource="{Binding ErroresValidacion}" Margin="0,10">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Border Stroke="#E57373" BackgroundColor="#FFEBEE" StrokeShape="RoundRectangle 6" Padding="8" Margin="0,4">
-                            <Label Text="{Binding .}" TextColor="#C62828" FontSize="13" />
+                            <Label Text="{Binding}" TextColor="#C62828" FontSize="13" />
                         </Border>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-            <!-- Botón -->
+            <!-- Boton Registrar -->
             <Button Text="Registrar"
                     Command="{Binding GuardarUsuarioCommand}"
                     BackgroundColor="#27AE60"
@@ -90,7 +90,6 @@
                     FontAttributes="Bold"
                     HeightRequest="48" />
 
-            <!-- Loader -->
             <ActivityIndicator IsRunning="{Binding IsBusy}"
                                IsVisible="{Binding IsBusy}" />
 
